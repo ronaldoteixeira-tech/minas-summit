@@ -1,0 +1,65 @@
+/*
+Theme Name: Festiva Child
+Theme URI: http://demo.bravisthemes.com/festiva
+Author: Bravis-Themes
+Author URI: https://bravisthemes.com/
+Description: Festiva is the most versatile events and conference theme for WordPress. It has 04 unique homepage layouts, available as multi-page or one-page designs. Each layout has been carefully crafted to provide a modern and clean browsing experience for your readers. With Festiva, your events and conferences are going to stand out like never before.
+Version: 1.0.0
+Tested up to: 6.0
+Requires PHP: 7.4
+License: ThemeForest
+License URI: https://themeforest.net/licenses
+Template: festiva
+Text Domain: festiva-child
+Tags: 	attendees, conference, education, event, event theme, festival, meetup, multi event, onepage, schedule, seminar, ticket, tickets, webinar, zoom
+Copyright (c) 2024 Bravis-Themes. All rights reserved.
+This theme is licensed under the GPL-2.0+ license.
+*/
+#pxl-header-default .pxl-header-main, #pxl-header-elementor .pxl-header-main {
+        background: var(--purple-grad-2, linear-gradient(180deg, #068c7e 0%, #020c0b 100%));
+        position: relative;
+    }
+
+@media screen and (max-width: 1200px) {
+    .pxl-header-menu {
+        background: linear-gradient(180deg, #068c7e 0%, #17112b 100%);
+        overflow-y: scroll;
+    }
+}
+.pxl-wapper {
+    background: #00232b;
+}
+svg linearGradient stop:first-child {
+    stop-color: #2EC4B6 !important;
+}
+
+svg linearGradient stop:last-child {
+    stop-color: #0FA3B1 !important;
+}
+
+.pxl-pricing2 .pxl-pricing--inner.style_layout_1, .pxl-pricing2 .pxl-pricing--inner.style_layout_2, .pxl-pricing2 .pxl-pricing--inner.style_layout_custom {
+    background: var(--blue-grad-1, linear-gradient(180deg, #254145 0%, #091a15 100%));
+}
+.pxl-image-box1 .pxl-item--inner .pxl-item--holder .pxl-item--title {
+    color: #264f4d99;
+}
+
+.pxl-pricing2 .pxl-pricing--inner.style_layout_1 .pxl-content-top .pxl-get--ticket .pxl-ticket--inner .pxl-ticket:after, .pxl-pricing2 .pxl-pricing--inner.style_layout_2 .pxl-content-top .pxl-get--ticket .pxl-ticket--inner .pxl-ticket:after, .pxl-pricing2 .pxl-pricing--inner.style_layout_custom .pxl-content-top .pxl-get--ticket .pxl-ticket--inner .pxl-ticket:after {
+    background: var(--purple-Grad-1, linear-gradient(180deg, #105952 0%, #0a4139 100%));
+    opacity: 0;
+}
+
+.pxl-pricing2 .pxl-pricing--inner.style_layout_1:hover, .pxl-pricing2 .pxl-pricing--inner.style_layout_2:hover, .pxl-pricing2 .pxl-pricing--inner.style_layout_custom:hover {
+    background: var(--purple-grad-2, linear-gradient(180deg, #1d6157 0%, #0b2721 100%));
+}
+
+
+.pxl-event-grid-layout1 .pxl-item--holder.style-layout--1:hover, .pxl-event-grid-layout1 .pxl-item--holder.style-layout--2:hover {
+    border: 2px solid rgb(26 233 202 / 50%);
+}
+
+.pxl-event-grid-layout1 .pxl-item--holder.style-layout--1 .pxl-item--featured .pxl-btn-category, .pxl-event-grid-layout1 .pxl-item--holder.style-layout--2 .pxl-item--featured .pxl-btn-category {
+    background: #1c9776;
+    border-radius: 6px;
+}
+

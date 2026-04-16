@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="pt-BR" style="scroll-behavior: smooth;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minas Summit 2026 | Brandbook Experience</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&family=Poppins:wght@700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Palette Core */
+            --ms-white: #ffffff;
+            --ms-dark: #0a2100;
+            --ms-dark-alt: #0d1a0bd1;
+            --ms-green-mid: #557e2d;
+            --ms-green-light: #a7aa36;
+            --ms-red: #099C94;
+            
+            /* Backgrounds */
+            --bg-body: #050a00;
+            --bg-glass: rgba(255, 255, 255, 0.03);
+            --bg-glass-hover: rgba(255, 255, 255, 0.06);
+            --border-glass: rgba(255, 255, 255, 0.08);
+            
+            /* Text */
+            --text-main: #ffffff;
+            --text-muted: #8b9991;
+            
+            /* Fonts */
+            --font-heading: 'Syne', sans-serif;
+            --font-body: 'Plus Jakarta Sans', sans-serif;
+            --font-display: 'Poppins', sans-serif;
+            
+            /* Animation */
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* =============== MAGIC CURSOR LIGHT =============== */
+        .cursor-light {
+            position: fixed;
+            top: -300px;
+            left: -300px;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(167, 170, 54, 0.35), rgba(85, 126, 45, 0.15) 40%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 1; /* Below glass, above background */
+            filter: blur(40px);
+            will-change: transform;
+            transition: opacity 0.5s;
+        }
+
+        /* Static ambient lights for context */
+        .ambient-light-1 {
+            position: absolute;
+            top: 20%;
+            right: -10%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(167, 170, 54, 0.08), transparent 70%);
+            border-radius: 50%;
+            z-index: 0;
+            pointer-events: none;
+        }
+        .ambient-light-2 {
+            position: absolute;
+            bottom: 10%;
+            left: -10%;
+            width: 900px;
+            height: 900px;
+            background: radial-gradient(circle, rgba(85, 126, 45, 0.08), transparent 70%);
+            border-radius: 50%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* =============== GLASSMORPHISM BASE =============== */
+        .glass-panel {
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-radius: 24px;
+            position: relative;
+            z-index: 3; /* Crucial for light effect */
+            overflow: hidden;
+        }
+        .glass-panel::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: 24px;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+            pointer-events: none;
+        }
+
+        /* =============== NAVIGATION =============== */
+        .navbar {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background: rgba(5, 10, 0, 0.5);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-glass);
+            transition: var(--transition);
+        }
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+        .nav-logo img {
+            height: 38px;
+            width: auto;
+            object-fit: contain;
+            transition: var(--transition);
+        }
+        .nav-logo:hover img {
+            transform: scale(1.05);
+        }
+        .nav-links {
+            display: flex;
+            gap: 32px;
+        }
+        .nav-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+        }
+        .nav-link:hover { color: var(--ms-white); }
+        .nav-btn {
+            background: linear-gradient(90deg, var(--ms-green-mid), var(--ms-green-light));
+            color: #fff;
+            padding: 10px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: var(--transition);
+        }
+        .nav-btn:hover {
+            box-shadow: 0 10px 20px rgba(167, 170, 54, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* =============== LAYOUT STRUCTURE =============== */
+        .container {
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 0 40px;
+            position: relative;
+            z-index: 3;
+        }
+        
+        section {
+            padding: 120px 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* =============== TYPOGRAPHY & HEADERS =============== */
+        .badge {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 50px;
+            background: rgba(167, 170, 54, 0.1);
+            border: 1px solid rgba(167, 170, 54, 0.3);
+            color: var(--ms-green-light);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+            backdrop-filter: blur(4px);
+        }
+        
+        .title-xl {
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 6vw, 6rem);
+            font-weight: 700;
+            line-height: 1.05;
+            letter-spacing: -0.03em;
+            margin-bottom: 24px;
+            background: linear-gradient(180deg, #FFFFFF 0%, rgba(255,255,255,0.7) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.5); /* Helps legibility over the globe */
+        }
+        
+        .title-md {
+            font-family: var(--font-heading);
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 32px;
+            color: var(--ms-white);
+        }
+
+        .subtitle {
+            font-size: clamp(1.1rem, 1.5vw, 1.3rem);
+            color: var(--text-muted);
+            max-width: 600px;
+            line-height: 1.6;
+        }
+        
+        /* =============== HERO SECTION =============== */
+        .hero {
+            position: relative;
+            padding-top: 140px;
+            min-height: 100vh;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+        .hero .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .hero-desc {
+            font-size: clamp(1.2rem, 2vw, 1.5rem);
+            color: var(--text-muted);
+            max-width: 800px;
+            margin: 0 auto 50px;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.6);
+        }
+
+        #globeCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        /* =============== BENTO GRID LAYOUT =============== */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-auto-rows: minmax(280px, auto);
+            gap: 24px;
+            margin-top: 60px;
+        }
+        .bento-item {
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            transition: var(--transition);
+        }
+        .bento-item:hover {
+            transform: translateY(-8px);
+            background: var(--bg-glass-hover);
+            border-color: rgba(255,255,255,0.15);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+        }
+        .bento-item.col-2 { grid-column: span 2; }
+        .bento-item.col-3 { grid-column: span 3; }
+        .bento-item.col-4 { grid-column: span 4; }
+        .bento-item.row-2 { grid-row: span 2; }
+
+        /* =============== BRAND IDENTITIES =============== */
+        .logo-presentation {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px;
+            min-height: 400px;
+        }
+        .logo-presentation img {
+            max-width: 100%;
+            max-height: 120px;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
+        }
+
+        /* Color Palettes */
+        .color-swatch-bento {
+            flex: 1;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        .color-name { font-family: var(--font-heading); font-size: 24px; font-weight: 700; margin-bottom: 4px;}
+        .color-hex { font-family: monospace; color: var(--text-muted); font-size: 15px;}
+
+        /* Typography */
+        .typo-huge {
+            font-family: var(--font-heading);
+            font-size: clamp(6rem, 10vw, 12rem);
+            font-weight: 700;
+            line-height: 0.8;
+            color: var(--ms-white);
+            margin-bottom: 20px;
+            text-align: center;
+            letter-spacing: -5px;
+        }
+        .typo-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-top: auto;
+        }
+
+        /* Do's and Dont's */
+        .rule-list { list-style: none; margin-top: 30px; }
+        .rule-list li {
+            position: relative;
+            padding-left: 48px;
+            margin-bottom: 24px;
+            font-size: 18px;
+            color: var(--text-muted);
+        }
+        .rule-list.dos li::before, .rule-list.donts li::before {
+            position: absolute;
+            left: 0; top: -4px;
+            width: 32px; height: 32px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: bold; font-size: 16px;
+        }
+        .rule-list.dos li::before {
+            content: "✓";
+            color: #61CE70;
+            background: rgba(97, 206, 112, 0.1);
+        }
+        .rule-list.donts li::before {
+            content: "✕";
+            color: var(--ms-red);
+            background: rgba(215, 40, 47, 0.1);
+        }
+
+        /* Mockup */
+        .mockup-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 12px;
+            opacity: 0.8;
+            transition: var(--transition);
+        }
+        .bento-item:hover .mockup-img {
+            opacity: 1;
+            transform: scale(1.03);
+        }
+
+        /* =============== SCROLL REVEAL =============== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* =============== NEW BUTTONS CSS =============== */
+        .btn-outline-new {
+            width: 100%;
+            border: 1px solid rgba(167, 170, 54, 0.4);
+            color: var(--ms-green-light);
+            background: transparent;
+            cursor: pointer;
+            padding: 18px;
+            font-size: 16px;
+            border-radius: 50px;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-family: var(--font-body);
+            font-weight: 600;
+        }
+        .btn-outline-new:hover {
+            background: rgba(167, 170, 54, 0.1);
+            border-color: var(--ms-green-light);
+            box-shadow: 0 5px 20px rgba(167, 170, 54, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .btn-ghost-new {
+            width: 100%;
+            border: none;
+            color: var(--ms-white);
+            background: transparent;
+            cursor: pointer;
+            padding: 18px;
+            font-size: 16px;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-family: var(--font-body);
+            font-weight: 600;
+            opacity: 0.8;
+        }
+        .btn-ghost-new:hover {
+            color: var(--ms-green-light);
+            opacity: 1;
+            transform: translateY(-2px);
+        }
+        .btn-ghost-new svg {
+            transition: var(--transition);
+        }
+        .btn-ghost-new:hover svg {
+            transform: translateX(4px);
+        }
+
+        .btn-aqua-solid {
+            width: 100%;
+            border: none;
+            color: var(--ms-white);
+            background: var(--ms-red);
+            cursor: pointer;
+            padding: 18px;
+            font-size: 16px;
+            border-radius: 50px;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-family: var(--font-body);
+            font-weight: 600;
+        }
+        .btn-aqua-solid:hover {
+            box-shadow: 0 10px 20px rgba(9, 156, 148, 0.4);
+            transform: translateY(-2px);
+            filter: brightness(1.1);
+        }
+
+        .btn-aqua-outline {
+            width: 100%;
+            border: 1px solid rgba(9, 156, 148, 0.4);
+            color: var(--ms-red);
+            background: transparent;
+            cursor: pointer;
+            padding: 18px;
+            font-size: 16px;
+            border-radius: 50px;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-family: var(--font-body);
+            font-weight: 600;
+        }
+        .btn-aqua-outline:hover {
+            background: rgba(9, 156, 148, 0.1);
+            border-color: var(--ms-red);
+            box-shadow: 0 5px 20px rgba(9, 156, 148, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Media Queries */
+        @media (max-width: 1024px) {
+            .bento-grid { grid-template-columns: repeat(2, 1fr); }
+            .bento-item.col-3, .bento-item.col-4 { grid-column: span 2; }
+            .nav-links { display: none; }
+        }
+        @media (max-width: 768px) {
+            .bento-grid { grid-template-columns: 1fr; }
+            .bento-item.col-2, .bento-item.col-3, .bento-item.col-4 { grid-column: span 1; }
+            section { padding: 80px 0; }
+            .title-xl { font-size: 3rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Magic Cursor Light -->
+    <div class="cursor-light" id="cursorLight"></div>
+    <div class="ambient-light-1"></div>
+    <div class="ambient-light-2"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <a href="#home" class="nav-logo">
+            <img src="logo branca.png" alt="Minas Summit">
+        </a>
+        <div class="nav-links">
+            <a href="#id-visual" class="nav-link">Identidade Visual</a>
+            <a href="#cores" class="nav-link">Cores</a>
+            <a href="#tipografia" class="nav-link">Tipografia</a>
+            <a href="#diretrizes" class="nav-link">Diretrizes</a>
+        </div>
+        <a href="#download" class="nav-btn">Baixar Assets</a>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <!-- Interactive Tech Globe Canvas -->
+        <canvas id="globeCanvas"></canvas>
+        
+        <div class="container reveal active">
+            <span class="badge">Brandbook 2026</span>
+            <h1 class="title-xl">O Futuro da<br>Inovação.</h1>
+            <p class="hero-desc">Descubra a essência visual do Minas Summit. Uma identidade forjada na interseção entre a solidez corporativa e o dinamismo do ecossistema de inovação tecnológica.</p>
+        </div>
+    </section>
+
+    <!-- Logo & Foundation Section -->
+    <section id="id-visual">
+        <div class="container">
+            <span class="badge">Marca Oficial</span>
+            <h2 class="title-md">A nova era digital de Minas.</h2>
+            <p class="subtitle">Traços geométricos, imponentes e modernos. O detalhe no "A" e a geodésica representam a rede infinita de conexões.</p>
+
+            <div class="bento-grid">
+                <!-- Logo Showcase -->
+                <div class="bento-item glass-panel col-3 row-2 logo-presentation reveal">
+                    <img src="logo branca.png" alt="Minas Summit Logo" id="main-logo" onerror="this.src=''; this.alt='Minas Summit Logo Oficial';">
+                </div>
+                
+                <!-- Origin -->
+                <div class="bento-item glass-panel reveal" style="transition-delay: 0.1s;">
+                    <div style="margin-bottom: 20px;">
+                        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--ms-green-light)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m8 3 4 8 5-5 5 15H2L8 3z"/>
+                        </svg>
+                    </div>
+                    <h3 style="font-family: var(--font-heading); font-size: 24px; margin-bottom: 12px;">Nossa Origem</h3>
+                    <p style="color: var(--text-muted); font-size: 15px;">O triângulo vermelho ancora fortemente o evento à bandeira e cultura de Minas Gerais.</p>
+                </div>
+
+                <!-- Concept -->
+                <div class="bento-item glass-panel reveal" style="transition-delay: 0.2s;">
+                    <div style="margin-bottom: 20px;">
+                        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--ms-green-light)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                            <path d="M2 12h20"></path>
+                        </svg>
+                    </div>
+                    <h3 style="font-family: var(--font-heading); font-size: 24px; margin-bottom: 12px;">Conexão</h3>
+                    <p style="color: var(--text-muted); font-size: 15px;">O polígono global ilustra abrangência e a conexão do estado com as maiores tendências tech globais.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Colors Section -->
+    <section id="cores">
+        <div class="container">
+            <span class="badge">DNA de Cores</span>
+            <h2 class="title-md">Nossa base visual.</h2>
+            <p class="subtitle">Elegância tech e pulso energético. O verde corporativo funde-se à iluminação lima do amanhã.</p>
+
+            <div class="bento-grid">
+                <!-- Color 1 -->
+                <div class="bento-item glass-panel reveal">
+                    <div class="color-swatch-bento" style="background: var(--ms-dark);"></div>
+                    <div>
+                        <div class="color-name">Deep Forest</div>
+                        <div class="color-hex">#0A2100 &nbsp;&bull;&nbsp; RGB 10,33,0</div>
+                    </div>
+                </div>
+
+                <!-- Color 2 -->
+                <div class="bento-item glass-panel reveal" style="transition-delay: 0.1s;">
+                    <div class="color-swatch-bento" style="background: var(--ms-green-mid);"></div>
+                    <div>
+                        <div class="color-name">Leaf Green</div>
+                        <div class="color-hex">#557E2D &nbsp;&bull;&nbsp; RGB 85,126,45</div>
+                    </div>
+                </div>
+
+                <!-- Color 3 -->
+                <div class="bento-item glass-panel reveal" style="transition-delay: 0.2s;">
+                    <div class="color-swatch-bento" style="background: var(--ms-green-light);"></div>
+                    <div>
+                        <div class="color-name">Tech Lime</div>
+                        <div class="color-hex">#A7AA36 &nbsp;&bull;&nbsp; RGB 167,170,54</div>
+                    </div>
+                </div>
+
+                <!-- Color 4 -->
+                <div class="bento-item glass-panel reveal" style="transition-delay: 0.3s;">
+                    <div class="color-swatch-bento" style="background: var(--ms-red);"></div>
+                    <div>
+                        <div class="color-name">Tech Aqua</div>
+                        <div class="color-hex">#099C94 &nbsp;&bull;&nbsp; RGB 9,156,148</div>
+                    </div>
+                </div>
+
+                <!-- Gradient -->
+                <div class="bento-item glass-panel col-4 reveal" style="display: flex; flex-direction: row; gap: 40px; align-items: center; padding: 30px 40px;">
+                    <div style="flex: 1;">
+                        <h3 style="font-family: var(--font-heading); font-size: 28px; margin-bottom: 10px;">Primary Gradient</h3>
+                        <p style="color: var(--text-muted);">Símbolo do movimento. O gradiente conecta o corporativo do Leaf Green ao pulsar tecnológico do Tech Lime. Usado em botões CTA e destaques primários.</p>
+                    </div>
+                    <div style="flex: 1; height: 100px; border-radius: 12px; background: linear-gradient(90deg, var(--ms-green-mid), var(--ms-green-light));"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Typography Section -->
+    <section id="tipografia">
+        <div class="container">
+            <span class="badge">A Voz em Texto</span>
+            <h2 class="title-md">Design System Fluido.</h2>
+            <p class="subtitle">Um contraste ousado. Syne traz personalidade forte e de vanguarda aos títulos, enquanto Plus Jakarta Sans atende perfeitamente à leitura técnica.</p>
+
+            <div class="bento-grid">
+                <!-- Font Syne -->
+                <div class="bento-item glass-panel col-2 row-2 reveal">
+                    <div class="typo-huge" style="font-family: var(--font-heading);">Aa</div>
+                    <div class="typo-info">
+                        <div>
+                            <div style="font-family: var(--font-heading); font-size: 32px; font-weight: 700;">Syne</div>
+                            <div style="color: var(--text-muted); font-size: 14px;">Utilizada em Heading 1 e Heading 2</div>
+                        </div>
+                        <div style="text-align: right;">
+                            <div style="font-weight: 800; color: var(--ms-green-light);">Extra Bold</div>
+                            <div style="font-weight: 700;">Bold</div>
+                            <div style="font-weight: 500;">Medium</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Font Jakarta -->
+                <div class="bento-item glass-panel col-2 row-2 reveal" style="transition-delay: 0.2s;">
+                    <div class="typo-huge" style="font-family: var(--font-body); letter-spacing: -2px;">Aa</div>
+                    <div class="typo-info">
+                        <div>
+                            <div style="font-family: var(--font-heading); font-size: 32px; font-weight: 700; margin-bottom: 5px;">Plus Jakarta Sans</div>
+                            <div style="color: var(--text-muted); font-size: 14px;">Para parágrafos (body), UI e legibilidade.</div>
+                        </div>
+                        <div style="text-align: right;">
+                            <div style="font-weight: 600; color: var(--ms-green-light);">SemiBold</div>
+                            <div style="font-weight: 500;">Medium</div>
+                            <div style="font-weight: 400;">Regular</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rules & Application Section -->
+    <section id="diretrizes">
+        <div class="container">
+            <span class="badge">Aplicações e Regras</span>
+            <h2 class="title-md">Consistência.</h2>
+            
+            <div class="bento-grid">
+                <!-- UI Components -->
+                <div class="bento-item glass-panel col-2 row-2 reveal">
+                    <h3 style="font-family: var(--font-heading); font-size: 28px; margin-bottom: 24px;">Glass & Glow UI</h3>
+                    <p style="color: var(--text-muted); margin-bottom: 40px;">Interfaces devem privilegiar temas mais escuros, mas também temas claros quando necessário, utilizando elementos em estilo 'glass' com translucidez, permitindo que a luz interna brilhe. Componentes devem possuir cantos arredondados.</p>
+                    
+                    <div style="padding: 30px; border: 1px dashed var(--border-glass); border-radius: 16px; position: relative; display: flex; flex-direction: column; gap: 16px;">
+                        <input type="text" placeholder="Nome completo" style="width: 100%; padding: 18px 24px; border-radius: 50px; background: rgba(0,0,0,0.3); border: 1px solid var(--border-glass); color: #fff; font-family: var(--font-body); outline: none; transition: var(--transition);">
+                        
+                        <button class="nav-btn" style="width: 100%; border: none; cursor: pointer; padding: 18px; font-size: 16px; display: flex; align-items: center; justify-content: center; gap: 10px;">
+                            Testar Botão Primário
+                        </button>
+
+                        <button class="btn-outline-new">
+                            Versão Outline
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </button>
+
+                        <button class="btn-ghost-new">
+                            Saiba mais 
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </button>
+
+                        <button class="btn-aqua-solid">
+                            Ação Tech Aqua
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+                        </button>
+
+                        <button class="btn-aqua-outline">
+                            Ghost Aqua
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Rules -->
+                <div class="bento-item glass-panel col-2 reveal" style="transition-delay: 0.1s;">
+                    <h3 style="font-family: var(--font-heading); font-size: 24px; color: #61CE70; margin-bottom: 24px;">Boas Práticas</h3>
+                    <ul class="rule-list dos">
+                        <li>Utilize a logo inteiramente branca sobre fundos escuros do brandbook.</li>
+                        <li>Proporcione alto respiro (espaçamento) entre elementos da Interface.</li>
+                        <li>Trabalhe preferencialmente em temas Dark.</li>
+                    </ul>
+                </div>
+
+                <div class="bento-item glass-panel col-2 reveal" style="transition-delay: 0.2s;">
+                    <h3 style="font-family: var(--font-heading); font-size: 24px; color: var(--ms-red); margin-bottom: 24px;">Restrições</h3>
+                    <ul class="rule-list donts">
+                        <li>Não altere a cor oficial do triângulo no logotipo da marca.</li>
+                        <li>Não estrangule a logo com outros elementos. Preservar margem = 'M'.</li>
+                        <li>Não distorça ou modifique as proporções da tipografia principal.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="padding: 80px 40px; text-align: center; border-top: 1px solid var(--border-glass); background: rgba(0,0,0,0.4); position: relative; z-index: 2; backdrop-filter: blur(10px);">
+        <p style="font-family: var(--font-heading); font-size: 24px; color: var(--ms-white); margin-bottom: 20px;">Minas Summit 2026</p>
+        <p style="color: var(--text-muted); font-size: 14px;">Um evento focado no futuro tecnológico. Brandbook oficial.</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        /* =============== MAGIC CURSOR LIGHT =============== */
+        const cursorLight = document.getElementById('cursorLight');
+        let mouseX = window.innerWidth / 2;
+        let mouseY = window.innerHeight / 2;
+        let lightX = mouseX;
+        let lightY = mouseY;
+        let hasMoved = false;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            
+            if (!hasMoved) {
+                cursorLight.style.opacity = '1';
+                hasMoved = true;
+            }
+        });
+
+        function animateLight() {
+            lightX += (mouseX - lightX) * 0.08;
+            lightY += (mouseY - lightY) * 0.08;
+            cursorLight.style.transform = `translate(${lightX}px, ${lightY}px)`;
+            requestAnimationFrame(animateLight);
+        }
+        animateLight();
+
+        /* =============== 3D TECH GLOBE CANVAS =============== */
+        const canvas = document.getElementById('globeCanvas');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+
+        function resizeCanvas() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = document.querySelector('.hero').offsetHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        const dots = [];
+        const DOT_COUNT = window.innerWidth > 768 ? 900 : 400; // Performance tuning
+        const GLOBE_RADIUS = window.innerWidth > 768 ? 350 : 200;
+        const FIELD_OF_VIEW = width * 0.8;
+
+        // Generate dots evenly over a sphere
+        for (let i = 0; i < DOT_COUNT; i++) {
+            // Using extremely simple random sphere distribution, or Fibonacci sphere for even spread
+            const y = 1 - (i / (DOT_COUNT - 1)) * 2;
+            const radiusAtY = Math.sqrt(1 - y * y);
+            const theta = 2.4 * Math.PI * i; // golden angle approx
+            
+            const x = Math.cos(theta) * radiusAtY;
+            const z = Math.sin(theta) * radiusAtY;
+            
+            // Random variation to make it look like a tech network and less perfect
+            const variation = (Math.random() * 0.1) + 0.95; 
+
+            dots.push({
+                x: x * GLOBE_RADIUS * variation,
+                y: y * GLOBE_RADIUS * variation,
+                z: z * GLOBE_RADIUS * variation,
+                size: Math.random() * 1.5 + 0.5
+            });
+        }
+
+        let rotation = 0;
+
+        function animateGlobe() {
+            ctx.clearRect(0, 0, width, height);
+            
+            rotation += 0.002;
+            
+            for (let i = 0; i < dots.length; i++) {
+                const dot = dots[i];
+                
+                // Emulate slight tilt of the globe globally
+                let tiltX = 0.2; 
+                let rx1 = dot.x;
+                let ry1 = dot.y * Math.cos(tiltX) - dot.z * Math.sin(tiltX);
+                let rz1 = dot.y * Math.sin(tiltX) + dot.z * Math.cos(tiltX);
+
+                // Rotate around Y axis
+                const rotX = rx1 * Math.cos(rotation) - rz1 * Math.sin(rotation);
+                const rotZ = rz1 * Math.cos(rotation) + rx1 * Math.sin(rotation);
+                
+                // Add depth perspective
+                const sizeProjection = FIELD_OF_VIEW / (FIELD_OF_VIEW - rotZ);
+                const xProject = (rotX * sizeProjection) + width / 2;
+                const yProject = (ry1 * sizeProjection) + height / 2;
+                
+                // Alpha fade based on Z depth to give a 3D feel
+                const distanceRatio = (rotZ + GLOBE_RADIUS) / (GLOBE_RADIUS * 2); 
+                const opacity = Math.max(0.05, distanceRatio);
+                
+                ctx.beginPath();
+                ctx.arc(xProject, yProject, dot.size * sizeProjection, 0, Math.PI * 2);
+                
+                // Coloring: Tech Lime color (167, 170, 54)
+                ctx.fillStyle = `rgba(167, 170, 54, ${opacity * 0.8})`;
+                ctx.fill();
+                
+                // Add sporadic tech "lines" connecting close dots
+                if (Math.random() > 0.99 && distanceRatio > 0.5) {
+                    let partner = dots[Math.floor(Math.random() * dots.length)];
+                    let px = partner.x * Math.cos(rotation) - partner.z * Math.sin(rotation);
+                    let pz = partner.z * Math.cos(rotation) + partner.x * Math.sin(rotation);
+                    let poproj = FIELD_OF_VIEW / (FIELD_OF_VIEW - pz);
+                    let pxProj = (px * poproj) + width / 2;
+                    let pyProj = (partner.y * poproj) + height / 2;
+                    
+                    ctx.beginPath();
+                    ctx.moveTo(xProject, yProject);
+                    ctx.lineTo(pxProj, pyProj);
+                    ctx.strokeStyle = `rgba(167, 170, 54, ${opacity * 0.2})`;
+                    ctx.stroke();
+                }
+            }
+            
+            requestAnimationFrame(animateGlobe);
+        }
+        animateGlobe();
+
+        /* =============== SCROLL REVEAL =============== */
+        function revealElements() {
+            var reveals = document.querySelectorAll('.reveal');
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100;
+                
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add('active');
+                }
+            }
+        }
+        
+        window.addEventListener('scroll', revealElements);
+        revealElements();
+
+        /* =============== NAVBAR EFFECTS =============== */
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(5, 10, 0, 0.9)';
+                navbar.style.padding = '15px 40px';
+            } else {
+                navbar.style.background = 'rgba(5, 10, 0, 0.5)';
+                navbar.style.padding = '20px 40px';
+            }
+        });
+    </script>
+</body>
+</html>

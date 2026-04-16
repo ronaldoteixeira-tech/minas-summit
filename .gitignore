@@ -1,0 +1,22 @@
+# Arquivos de Sistema
+.DS_Store
+Thumbs.db
+
+# VS Code
+.vscode/
+
+# Editor de Texto / IDEs
+*.swp
+*.log
+
+# Pasta de Metadados da IA (Antigravity)
+.gemini/
+*.md
+!README.md
+!implementation_plan.md
+!walkthrough.md
+
+# Build / Dependências (Se houver no futuro)
+node_modules/
+dist/
+build/
