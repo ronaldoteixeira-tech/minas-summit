@@ -164,8 +164,8 @@ body {
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding-top: 80px;
-    /* Accounts for navbar */
+    padding-top: 140px;
+    /* Accounts for navbar with extra breathing room */
 }
 
 .hero-bg {
@@ -317,7 +317,7 @@ section {
     }
 
     .hero {
-        padding-top: 100px;
+        padding-top: 120px;
         padding-bottom: 60px;
     }
 
