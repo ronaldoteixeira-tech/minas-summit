@@ -392,6 +392,12 @@
             section { padding: 80px 0; }
         }
     </style>
+
+    <!-- Vercel Web Analytics -->
+    <script type="module">
+        import { inject } from 'https://cdn.jsdelivr.net/npm/@vercel/analytics@2/+esm';
+        inject({ mode: 'auto' });
+    </script>
 </head>
 <body>
 
